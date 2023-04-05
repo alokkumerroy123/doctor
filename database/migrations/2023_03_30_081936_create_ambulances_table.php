@@ -17,7 +17,9 @@ class CreateAmbulancesTable extends Migration
             $table->id();
             $table->string("driver_name");
             $table->string("personal_number");
-            $table->string("address");
+            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
+            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
+            $table->foreignId('upzila_id')->constrained('upzilas')->onDelete('cascade');
             $table->string("location");
             $table->timestamps();
         });

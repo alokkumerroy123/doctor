@@ -123,7 +123,7 @@
                             <label for="name">Specialist</label>
                             <select name="specialist_id" class="form-control selectpicker" title="select division" required
                                 id="specialist_id">
-                                <option value="">---Select Division---</option>
+                                <option value="">---Select Specialist---</option>
                                 @foreach ($specialist as $item)
                                     <option value="{{ $item->id }}">{{ $item->specialist_name }}</option>
                                 @endforeach
