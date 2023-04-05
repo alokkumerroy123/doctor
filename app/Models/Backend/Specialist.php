@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Specialist extends Model
 {
     use HasFactory;
-    use HasFactory;
+   
     protected $guarded=[];
 
+    public function doctor(){ 
+        return $this->belongsTo(Doctor::class);
+    }
    
 }

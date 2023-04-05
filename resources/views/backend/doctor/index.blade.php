@@ -51,7 +51,8 @@
                                         <td>
                                             <img src="{{ asset('uploads/doctors/' . $doctors->photo) }}" width="80px">
                                         </td>
-                                        <td>{{ $doctors->specialist->specialist_name }}</td>
+                                        <td>{{ $doctors->specialist->specialist_name ?? null }}</td>
+                                
                                         <td>{{ $doctors->degree }}</td>
                                         <td>{{ $doctors->mobile }}</td>
                                         <td>{{ $doctors->division->division_name }}</td>
@@ -271,18 +272,26 @@
                             <input type="text" name="doctor_name" class="form-control" id="update_name">
                         </div>
                         <div class="form-group text-success">
+                            <label for="name">Division</label>
+                            <select name="division_id" class="form-control" id="update_division">
+                                @foreach ($division as $divisions)
+                                    <option value="{{ $divisions->id}}">{{ $divisions->division_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group text-success">
                             <label for="name">District</label>
-                            <select name="district_name" class="form-control" id="update_district">
+                            <select name="district_id" class="form-control" id="update_district">
                                 @foreach ($district as $dstricts)
-                                    <option>{{ $dstricts->district_name }}</option>
+                                    <option value="{{ $dstricts->id}}">{{ $dstricts->district_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group text-success">
                             <label for="name">Upzila</label>
-                            <select name="upzila_name" class="form-control" id="update_upzila">
+                            <select name="upzila_id" class="form-control" id="update_upzila">
                                 @foreach ($upzila as $upzilas)
-                                    <option>{{ $upzilas->upzila_name }}</option>
+                                    <option value="{{ $upzilas->id}}">{{ $upzilas->upzila_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -313,8 +322,13 @@
                         </div>
                         <div class="form-group text-success">
                             <label for="name">Specialist</label>
-                            <input type="text" name="specialist" class="form-control" id="update_specialist"
-                                required>
+                            <select name="specialist_id" class="form-control selectpicker" title="select division"
+                                id="update_specialist">
+                                <option value="">---Select Specialist---</option>
+                                @foreach ($specialist as $item)
+                                    <option value="{{ $item->id }}">{{ $item->specialist_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group text-success">
                             <label for="name">Mobile</label>
@@ -398,16 +412,16 @@
             $.get(url,
                 function(data) {
                     $('#update_name').val(data.doctor_name);
-                    $('#update_district').val(data.district_name);
-                    $('#update_upzila').val(data.upzila_name);
-                    $('#update_type').val(data.type);
+                    $('#update_division').val(data.division_id);
+                    $('#update_district').val(data.district_id);
+                    $('#update_upzila').val(data.upzila_id);
+                    $('#type').val(data.type);
                     $('#update_id').val(data.id);
                     $('#update_degree').val(data.degree);
-                    $('#update_specialist').val(data.specialist);
+                    $('#update_specialist').val(data.specialist_id).change();
                     $('#update_mobile').val(data.mobile);
                     $('#update_chamber').val(data.chamber);
                     $('#update_fee').val(data.fee);
-                    $('#update_visiting_day').val(data.visiting_day);
                     $('#update_appoinment').val(data.appoinment);
                 }
             );

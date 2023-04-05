@@ -54,6 +54,12 @@ class DoctorController extends Controller
     ];
 
          $doctor = Doctor::create($inputs);
+
+        //  foreach ($request->specialist_name as $key => $value) {
+        //     $specialist_name['specialist_name'] = $value;
+        //     $specialist_name['doctor_id'] = $doctor->id;
+        //     Specialist::create($specialist_name);
+          
      
           foreach ($request->type as $key => $value) {
             $type['type'] = $value;
@@ -78,9 +84,37 @@ class DoctorController extends Controller
 
     public function update(Request $request)
     {   
-          
-        $data = Doctor::find($request->update_id);
-        $data->update($request->except('update_id'));
+        $data=[
+            'doctor_name'=>$request->input('doctor_name'),
+            'degree'=>$request->input('degree'),
+            'specialist_id'=>$request->input('specialist_id'),
+            'division_id'=>$request->input('division_id'),
+            'district_id'=>$request->input('district_id'),
+            'upzila_id'=>$request->input('upzila_id'),
+            'mobile'=>$request->input('mobile'),
+            'chamber'=>$request->input('chamber'),
+            'appoinment'=>$request->input('appoinment'),
+            'fee'=>$request->input('fee'),
+    
+        ];
+         
+        $inputs = Doctor::find($request->update_id);
+        $inputs->update($data);
+        
+     
+        Type::where('doctor_id',$inputs->id)->delete();
+        foreach ($request->type as $key => $value) {
+            $type['type'] = $value;
+            $type['doctor_id'] = $inputs->id;
+            Type::create($type);
+          }
+        Visiting_day::where('doctor_id',$inputs->id)->delete();
+          foreach ($request->visiting_day as $key => $value) {
+            $visiting_day['visiting_day'] = $value;
+            $visiting_day['doctor_id'] = $inputs->id;
+            Visiting_day::create($visiting_day);
+          }
+       
         return redirect()->route('doctor.index')->with('success','Doctor updated');
     }
 
