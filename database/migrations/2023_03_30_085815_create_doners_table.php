@@ -18,7 +18,9 @@ class CreateDonersTable extends Migration
             $table->string("doner_name");
             $table->string("blood_group");
             $table->string("mobile");
-            $table->string("address");
+            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
+            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
+            $table->foreignId('upzila_id')->constrained('upzilas')->onDelete('cascade');
             $table->timestamps();
         });
     }

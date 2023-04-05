@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-info sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -33,8 +33,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Doctor</h6>
                 <a class="collapse-item" href="{{route('doctor.index')}}">New Doctor</a>
+                <a class="collapse-item" href="{{route('specialist.index')}}">Specialist</a>
                 <a class="collapse-item" href="{{route("appointment.index")}}">Appointments Doctor</a>
-                <a class="collapse-item" href="">Best Doctor</a>
+                <a class="collapse-item" href="{{route("bestdoctor.index")}}">Best Doctor</a>
             </div>
         </div>
     </li>

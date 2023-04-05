@@ -17,7 +17,9 @@ class CreateDiagnosticsTable extends Migration
             $table->id();
             $table->string("diagnostic_name");
             $table->string("mobile");
-            $table->string("address");
+            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
+            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
+            $table->foreignId('upzila_id')->constrained('upzilas')->onDelete('cascade');
             $table->timestamps();
         });
     }

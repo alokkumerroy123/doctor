@@ -71,7 +71,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Division</h5>
+        <h5 class="modal-title text-success" id="exampleModalLabel">Add Division</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -79,7 +79,7 @@
       <div class="modal-body">
         <form action="{{route('division.store')}}" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Division Name</label>
                 <input type="text" name="division_name" class="form-control" id="name" required>
             </div>
@@ -94,7 +94,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Division</h5>
+        <h5 class="modal-title text-success" id="exampleModalLabel">Update Division</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -102,7 +102,7 @@
       <div class="modal-body">
         <form action="{{route('division.update')}}" method="POST">
           @csrf
-          <div class="form-group">
+          <div class="form-group text-success">
               <input type="hidden" name="update_id" id="update_id" />
               <label for="update_name">Division Name</label>
               <input type="text" name="division_name" class="form-control" id="update_name">

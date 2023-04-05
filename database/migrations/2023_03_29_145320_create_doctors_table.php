@@ -17,12 +17,15 @@ class CreateDoctorsTable extends Migration
             $table->id();
             $table->string("doctor_name");
             $table->string("degree");
+            $table->foreignId('specialist_id')->constrained('specialists')->onDelete('cascade');
             $table->string("mobile");
             $table->string("chamber");
-            $table->string("visiting_day");
+            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
+            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
+            $table->foreignId('upzila_id')->constrained('upzilas')->onDelete('cascade');
             $table->string("appoinment")->nullable();
             $table->string("fee");
-            $table->integer("type")->default(1);
+            $table->string('photo');
             $table->timestamps();
         });
     }

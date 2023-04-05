@@ -77,7 +77,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Ambulance</h5>
+        <h5 class="modal-title text-success" id="exampleModalLabel">Add Ambulance</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -85,19 +85,19 @@
       <div class="modal-body">
         <form action="{{route('ambulance.store')}}" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Driver Name</label>
                 <input type="text" name="driver_name" class="form-control" id="name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Mobile</label>
                 <input type="text" name="personal_number" class="form-control" id="name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Address</label>
                 <input type="text" name="address" class="form-control" id="address" required>
             </div>
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Location</label>
                 <input type="text" name="location" class="form-control" id="location" required>
             </div>

@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Doner;
 use Illuminate\Http\Request;
+use App\Models\Backend\Division;
+use App\Models\Backend\District;
+use App\Models\Backend\Upzila;
 use Toastr;
 
 class DonerController extends Controller
 {
     public function index(){
         $doner=Doner::all();
-        return view("backend.doner.index",compact("doner"));
+        $district=District::all();
+        $division=Division::all();
+        $upzila=Upzila::all();
+        return view("backend.doner.index",compact("doner","district","division","upzila"));
     }
 
     public function store(Request $request){
@@ -20,15 +26,15 @@ class DonerController extends Controller
         return redirect()->route('doner.index');
     }
 
-    
+
     public function edit($id){
-        $data = Doner::find($id);
+        $data =Doner::find($id);
         return response()->json($data);
     }
 
     public function update(Request $request)
     {   
-        $data = Doner::find($request->update_id);
+        $data =Doner::find($request->update_id);
         $data->update($request->except('update_id'));
         return redirect()->route('doner.index')->with('success','Doner updated');
     }

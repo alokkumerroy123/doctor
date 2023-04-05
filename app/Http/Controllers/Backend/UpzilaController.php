@@ -23,16 +23,29 @@ class UpzilaController extends Controller
         Toastr::success('Upzila Successfully Added', 'Title', ["Success" => "toast-top-right"]);
         return redirect()->route('upzila.index');
     }
+    // public function edit($id){
+    //     $data = Upzila::find($id);
+    //     return response()->json($data);
+    // }
+
+    // public function update(Request $request)
+    // {   
+    //     $data = Upzila::find($request->update_id);
+    //     $data->update($request->except('update_id'));
+    //     return redirect()->route('upzila.index')->with('success','Upzila updated');
+    // }
+
+    
     public function edit($id){
-        $data = Upzila::find($id);
+        $data =Upzila::find($id);
         return response()->json($data);
     }
 
     public function update(Request $request)
     {   
-        $data = Upzila::find($request->update_id);
+        $data =Upzila::find($request->update_id);
         $data->update($request->except('update_id'));
-        return redirect()->route('upzila.index')->with('success','Upzila updated');
+        return redirect()->route('upzila.index')->with('success','upzila updated');
     }
 
     public function destroy($id)

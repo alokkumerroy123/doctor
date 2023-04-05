@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Diagnostic;
+use App\Models\Backend\Division;
+use App\Models\Backend\District;
+use App\Models\Backend\Upzila;
 use Illuminate\Http\Request;
 use Toastr;
 
 class DiagnosticController extends Controller
 {
     public function index(){
+        $division=Division::all();
+        $district=District::all();
+        $upzila=Upzila::all();
         $diagnostic=Diagnostic::all();
-        return view('backend.diagnostic.index',compact('diagnostic'));
+        return view('backend.diagnostic.index',compact('diagnostic','division','district','upzila'));
     }
 
        

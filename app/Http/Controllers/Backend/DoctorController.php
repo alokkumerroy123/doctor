@@ -5,31 +5,68 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Backend\Doctor;
+use App\Models\Backend\Type;
+use App\Models\Backend\District;
+use App\Models\Backend\Division;
+use App\Models\Backend\Upzila;
+use App\Models\Backend\Visiting_day;
+use App\Models\Backend\Specialist;
 use Illuminate\Http\Request;
 use Toastr;
+use DB;
 
 class DoctorController extends Controller
 {
     public function index(){
+        // $doctor=DB::table('doctors')
+        // ->join('types','doctors.id','types.doctor_id')
+        // ->select('doctors.*','types.*')
+        // ->get();
+        $division=Division::all();
         $doctor=Doctor::all();
-        return view('backend.doctor.index',compact("doctor"));
+        $district=District::all();
+        $upzila=Upzila::all();
+        $specialist=Specialist::all();
+        return view('backend.doctor.index',compact("doctor","district","upzila","division","specialist"));
     }
 
-    
-    public function store(Request $request){
-        // Doctor::create($request->all());
+
+    public function store(Request $request){ 
+       
      
-        $doctor=new Doctor;
-        $doctor->doctor_name=$request->doctor_name;
-        $doctor->degree=$request->degree;
-        $doctor->mobile=$request->mobile;
-        $doctor->chamber=$request->chamber;
-        // $doctor->visiting_day=$request->visiting_day;
-        $doctor->visiting_day=json_encode($request->visiting_day);
-        $doctor->appoinment=$request->appoinment;
-        $doctor->fee=$request->fee;
-        $doctor->type=json_encode($request->type);
-        $doctor->save();
+        //photo rename and photo upload
+       $newName='doctor_'.time().'.'.$request->file('photo')->getClientOriginalExtension();
+       $request->file('photo')->move('uploads/doctors',$newName);
+
+       $inputs=[
+        'doctor_name'=>$request->input('doctor_name'),
+        'degree'=>$request->input('degree'),
+        'specialist_id'=>$request->input('specialist_id'),
+        'division_id'=>$request->input('division_id'),
+        'district_id'=>$request->input('district_id'),
+        'upzila_id'=>$request->input('upzila_id'),
+        'mobile'=>$request->input('mobile'),
+        'chamber'=>$request->input('chamber'),
+        'appoinment'=>$request->input('appoinment'),
+        'fee'=>$request->input('fee'),
+        'photo'=>$newName,
+
+    ];
+
+         $doctor = Doctor::create($inputs);
+     
+          foreach ($request->type as $key => $value) {
+            $type['type'] = $value;
+            $type['doctor_id'] = $doctor->id;
+            Type::create($type);
+          }
+
+          foreach ($request->visiting_day as $key => $value) {
+            $visiting_day['visiting_day'] = $value;
+            $visiting_day['doctor_id'] = $doctor->id;
+            Visiting_day::create($visiting_day);
+          }
+        
         Toastr::success('Doctor Successfully Added', 'Title', ["Success" => "toast-top-right"]);
         return redirect()->route('doctor.index');
     }
@@ -41,6 +78,7 @@ class DoctorController extends Controller
 
     public function update(Request $request)
     {   
+          
         $data = Doctor::find($request->update_id);
         $data->update($request->except('update_id'));
         return redirect()->route('doctor.index')->with('success','Doctor updated');

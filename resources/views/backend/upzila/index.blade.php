@@ -75,7 +75,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Upzila</h5>
+        <h5 class="modal-title text-success" id="exampleModalLabel">Add Upzila</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -83,24 +83,26 @@
       <div class="modal-body">
         <form action="{{route('upzila.store')}}" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="division_name">Division</label>
                 <select name="division_id" class="form-control selectpicker" title="select division" required id="division_id">
+                  <option value="">---Select Division---</option>
                     @foreach ($division as $item)
                         <option value="{{ $item->id }}">{{ $item->division_name }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="district_name">District</label>
                 <select name="district_id" class="form-control selectpicker" title="select division" required id="district_id">
+                  <option value="">---Select District---</option>
                     @foreach ($district as $item)
                         <option value="{{ $item->id }}">{{ $item->district_name }}</option>
                     @endforeach
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group text-success">
                 <label for="name">Upzila Name</label>
                 <input type="text" name="upzila_name" class="form-control" id="name" required>
             </div>
@@ -115,7 +117,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Upzila</h5>
+        <h5 class="modal-title text-success" id="exampleModalLabel">Update Upzila</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -123,7 +125,7 @@
       <div class="modal-body">
         <form action="{{route('upzila.update')}}" method="POST">
           @csrf
-          <div class="form-group">
+          <div class="form-group text-success">
             <label for="division_name">Division</label>
                 <select name="division_id" class="form-control selectpicker" title="select area" required id="update_division_id">
                     @foreach ($division as $item)
@@ -132,7 +134,7 @@
                 </select>
             </div>
 
-          <div class="form-group">
+          <div class="form-group text-success">
             <label for="division_name">District</label>
                 <select name="district_id" class="form-control selectpicker" title="select area" required id="update_district_id">
                     @foreach ($district as $item)
@@ -140,9 +142,9 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label for="name">Mobile</label>
-                <input type="text" name="mobile" class="form-control" id="update_mobile" required>
+            <div class="form-group text-success">
+                <label for="name">Upzila Name</label>
+                <input type="text" name="upzila_name" class="form-control" id="update_upzila" required>
             </div>
           <button class="btn btn-success mt-2" type="submit">Update</button>
         </form>
@@ -170,7 +172,7 @@
               function (data) {
                 $('#update_division_name').val(data.division_name);
                 $('#update_district_name').val(data.district_name);
-                $('#update_name').val(data.upzila_name);
+                $('#update_upzila').val(data.upzila_name);
                 $('#update_id').val(data.id);
               }
             );

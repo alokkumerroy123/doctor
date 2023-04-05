@@ -17,6 +17,7 @@ class CreateDoctorTypesTable extends Migration
             $table->id();
             $table->integer('doctor_id');
             $table->integer('type_id');
+            $table->integer('visiting_day_id');
             $table->timestamps();
         });
     }
