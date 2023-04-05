@@ -222,9 +222,9 @@
                 $('#update_name').val(data.doner_name);
                 $('#update_group').val(data.blood_group);
                 $('#update_mobile').val(data.mobile);
-                $('#update_division').val(data.division_name);
-                $('#update_district').val(data.district_name);
-                $('#update_upzila').val(data.upzila_name);
+                $('#update_division').val(data.division_id);
+                $('#update_district').val(data.district_id);
+                $('#update_upzila').val(data.upzila_id);
                 $('#update_id').val(data.id);
               }
             );

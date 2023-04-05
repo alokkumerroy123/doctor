@@ -170,8 +170,8 @@
             url = url.replace(':id',Id)
             $.get(url,
               function (data) {
-                $('#update_division_name').val(data.division_name);
-                $('#update_district_name').val(data.district_name);
+                $('#update_division_name').val(data.division_id);
+                $('#update_district_name').val(data.district_id);
                 $('#update_upzila').val(data.upzila_name);
                 $('#update_id').val(data.id);
               }

@@ -161,7 +161,7 @@
                             <label for="name">Mobile</label>
                             <input type="text" name="mobile" class="form-control" id="update_mobile">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group text-success">
                             <label for="division_name">Division</label>
                             <select name="division_id" class="form-control selectpicker" title="select division"
                                 id="update_division">
@@ -184,7 +184,7 @@
                         <div class="form-group text-success">
                             <label for="district_name">Upzila</label>
                             <select name="upzila_id" class="form-control selectpicker" title="select division" required
-                                id="update_district">
+                                id="update_upzila">
                                 <option value="">---Select upzila---</option>
                                 @foreach ($upzila as $item)
                                     <option value="{{ $item->id }}">{{ $item->upzila_name }}</option>
@@ -214,9 +214,9 @@
                 function(data) {
                     $('#update_name').val(data.diagnostic_name);
                     $('#update_mobile').val(data.mobile)
-                    $('#update_division').val(data.division_name);
-                    $('#update_district').val(data.district_name);
-                    $('#update_upzila').val(data.upzila_name);
+                    $('#update_division').val(data.division_id);
+                    $('#update_district').val(data.district_id);
+                    $('#update_upzila').val(data.upzila_id);
                     $('#update_id').val(data.id);
                 }
             );
