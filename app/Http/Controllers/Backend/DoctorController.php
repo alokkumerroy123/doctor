@@ -53,14 +53,7 @@ class DoctorController extends Controller
 
     ];
 
-         $doctor = Doctor::create($inputs);
-
-        //  foreach ($request->specialist_name as $key => $value) {
-        //     $specialist_name['specialist_name'] = $value;
-        //     $specialist_name['doctor_id'] = $doctor->id;
-        //     Specialist::create($specialist_name);
-          
-     
+         $doctor = Doctor::create($inputs);    
           foreach ($request->type as $key => $value) {
             $type['type'] = $value;
             $type['doctor_id'] = $doctor->id;
